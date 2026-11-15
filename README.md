@@ -1,0 +1,62 @@
+# Birinchi Shop Partner API — examples
+
+Code examples for the **[Birinchi Shop](https://birinchishop.uz) Partner API**: a COD (cash on delivery) affiliate network in Uzbekistan.
+Partners (affiliates, targetologists, media buyers) promote ready products; the network runs the call center, warehouse and nationwide delivery,
+and pays a fixed amount for every **delivered** order.
+
+- Human docs: https://birinchishop.uz/api/v1/docs
+- Guide for AI assistants (give it to Claude / ChatGPT / Cursor): https://birinchishop.uz/api/v1/guide.md
+- OpenAPI spec: https://birinchishop.uz/api/v1/openapi.json (a copy is in [`openapi.json`](openapi.json))
+- Base URL: `https://birinchishop.uz/api/v1`
+
+> **O'zbekcha:** bu repo — Birinchi Shop hamkorlik API'si uchun tayyor kod misollari (lid yuborish, zakaz holatlari, webhook imzosini tekshirish, Keitaro postback, MCP).
+> API kaliti panelda yaratiladi (Dashboard → API). Kalitni hech qachon kodga yoki ochiq repoga yozmang — faqat serveringizdagi `.env` da.
+>
+> **Русский:** примеры кода для партнёрского API Birinchi Shop — CPA-сети по товарке (COD) в Узбекистане: отправка лидов, статусы заказов, проверка подписи вебхука, постбэк в Keitaro/Binom, MCP для ИИ-агентов.
+
+## Contents
+
+| Folder | What it shows |
+|---|---|
+| [`examples/curl.sh`](examples/curl.sh) | Read-only requests: account, offers, orders |
+| [`examples/node`](examples/node), [`examples/python`](examples/python), [`examples/php`](examples/php) | Listing offers; submitting an order with an `Idempotency-Key` |
+| [`webhook-verify`](webhook-verify) | Receiving signed JSON webhooks and verifying `X-Birinchishop-Signature` (Node, Python, PHP) |
+| [`integrations/keitaro.md`](integrations/keitaro.md) | S2S postback to Keitaro / Binom / Voluum with `{click_id}` and other macros |
+| [`mcp`](mcp) | Connecting the Birinchi Shop MCP server to Claude, ChatGPT, Cursor |
+
+## Authentication
+
+```http
+Authorization: Bearer bsk_live_<id>_<secret>
+```
+
+Create a key in the partner panel (**Dashboard → API**) with only the scopes you need, an optional IP allowlist and an expiry date.
+The key is a **server-side secret**: read it from an environment variable (see [`.env.example`](.env.example)); never put it in browser JavaScript, a mobile app, a URL or a public repository.
+
+## Rules that matter
+
+- `POST /orders` creates a **real order** — a call center phones the customer. Never send test, sample or fake orders: the account gets blocked. The examples refuse to run unless you set `CONFIRM_REAL_ORDER=yes`.
+- Submitting orders via API needs the `orders:write` scope and an account with at least 3 delivered orders (or admin approval).
+- Always send an `Idempotency-Key` so a retry never creates a duplicate.
+- Branch on `error.code`, never on `error.message`.
+- Money is integer UZS; customer phone numbers in responses are always masked.
+- One phone number cannot order the same offer twice within 24 hours.
+- The payout is earned only when an order is **delivered** (`conversion_status = sale`).
+
+## Status model
+
+| `status` | `conversion_status` |
+|---|---|
+| `new`, `processing`, `callback` | `lead` |
+| `confirmed`, `packed`, `shipping` | `approved` |
+| `delivered` | `sale` (payout earned) |
+| `returned`, `cancelled` | `rejected` |
+
+## Start as a partner
+
+Registration is free: https://birinchishop.uz/register?utm_source=github&utm_campaign=api-examples
+Never pay anyone for "registration" or "activation" — see https://birinchishop.uz/xavfsizlik
+
+## License
+
+Examples are MIT-licensed (see [`LICENSE`](LICENSE)). Using the API itself is subject to the partner agreement on birinchishop.uz.
