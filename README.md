@@ -9,7 +9,7 @@ and pays a fixed amount for every **delivered** order.
 - OpenAPI spec: https://birinchishop.uz/api/v1/openapi.json (a copy is in [`openapi.json`](openapi.json))
 - Base URL: `https://birinchishop.uz/api/v1`
 
-> **O'zbekcha:** bu repo — Birinchi Shop hamkorlik API'si uchun tayyor kod misollari (lid yuborish, zakaz holatlari, webhook imzosini tekshirish, Keitaro postback, MCP).
+> **O'zbekcha:** bu repo — Birinchi Shop hamkorlik API'si uchun tayyor kod misollari (lid yuborish, zakaz holatlari, webhook imzosini tekshirish, Keitaro/Binom postback, Postman kolleksiyasi, MCP). Rasmiy kutubxonalar: `npm install birinchishop`, `pip install birinchishop`.
 > API kaliti panelda yaratiladi (Dashboard → API). Kalitni hech qachon kodga yoki ochiq repoga yozmang — faqat serveringizdagi `.env` da.
 >
 > **Русский:** примеры кода для партнёрского API Birinchi Shop — CPA-сети по товарке (COD) в Узбекистане: отправка лидов, статусы заказов, проверка подписи вебхука, постбэк в Keitaro/Binom, MCP для ИИ-агентов.
@@ -21,8 +21,38 @@ and pays a fixed amount for every **delivered** order.
 | [`examples/curl.sh`](examples/curl.sh) | Read-only requests: account, offers, orders |
 | [`examples/node`](examples/node), [`examples/python`](examples/python), [`examples/php`](examples/php) | Listing offers; submitting an order with an `Idempotency-Key` |
 | [`webhook-verify`](webhook-verify) | Receiving signed JSON webhooks and verifying `X-Birinchishop-Signature` (Node, Python, PHP) |
-| [`integrations/keitaro.md`](integrations/keitaro.md) | S2S postback to Keitaro / Binom / Voluum with `{click_id}` and other macros |
+| [`integrations/keitaro.md`](integrations/keitaro.md), [`integrations/binom.md`](integrations/binom.md) | S2S postback to Keitaro / Binom with `{click_id}`, status mapping |
+| [`postman`](postman) | Postman collection (every endpoint, example responses) and environment |
 | [`mcp`](mcp) | Connecting the Birinchi Shop MCP server to Claude, ChatGPT, Cursor |
+
+## Official SDKs
+
+| Language | Install | Source |
+|---|---|---|
+| Node.js 18+ (ESM + CommonJS, TypeScript types, no dependencies) | `npm install birinchishop` | [Birinchishop/birinchishop-node](https://github.com/Birinchishop/birinchishop-node) |
+| Python 3.8+ (standard library only, typed) | `pip install birinchishop` | [Birinchishop/birinchishop-python](https://github.com/Birinchishop/birinchishop-python) |
+
+Both cover every REST endpoint, retry `429`/`5xx` safely, page through lists, and verify webhook signatures:
+
+```js
+import Birinchishop from 'birinchishop';
+const bs = new Birinchishop({ apiKey: process.env.BSK_KEY });
+const { data: offers } = await bs.listOffers({ sort: 'best_selling', min_sale_rate: 25 });
+```
+
+```python
+from birinchishop import Birinchishop
+bs = Birinchishop()  # reads BSK_KEY
+offers = bs.list_offers(sort="best_selling", min_sale_rate=25)["data"]
+```
+
+## Postman
+
+Import [`postman/birinchishop-api-v1.postman_collection.json`](postman/birinchishop-api-v1.postman_collection.json) and
+[`postman/birinchishop-api-v1.postman_environment.json`](postman/birinchishop-api-v1.postman_environment.json),
+select the **Birinchi Shop API** environment and paste your key into `bsk_key` (a secret variable — never export or share it filled in).
+Every request has an example response. `POST /orders` creates a **real** order: `customer_phone` is empty on purpose.
+The collection is generated from `openapi.json` by [`postman/build_collection.py`](postman/build_collection.py).
 
 ## Authentication
 

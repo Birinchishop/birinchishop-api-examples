@@ -1,0 +1,2646 @@
+{
+  "info": {
+    "_postman_id": "b97a50b9-373a-5226-a477-8a374d8cc106",
+    "name": "Birinchi Shop Partner API v1",
+    "description": "Birinchi Shop Partner API v1 — COD CPA affiliate network in Uzbekistan.\n\n1. Import `birinchishop-api-v1.postman_environment.json`, select it and paste your key into `bsk_key` (Dashboard → API in the partner panel). Keep the key secret: do not share a collection export with the value filled in.\n2. Set the id variables (`offer_id`, `link_id`, …) to your own objects.\n\n**`POST /orders` creates a REAL order** (a call center phones the customer). Never send test or fake orders.\n\nDocs: https://birinchishop.uz/api/v1/docs · OpenAPI: https://birinchishop.uz/api/v1/openapi.json · Examples: https://github.com/Birinchishop/birinchishop-api-examples\n\nGenerated from openapi.json (api_version 2026-10-23). Example responses use fictional data.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bsk_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Account",
+      "item": [
+        {
+          "id": "da9e679c-5a25-5857-86ad-bfe0a3464dfb",
+          "name": "Account, balance and key info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me"
+              ]
+            },
+            "description": "Scope: `account:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                },
+                "description": "Scope: `account:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 7,\n    \"name\": \"Partner name\",\n    \"status\": \"active\",\n    \"balance\": 450000,\n    \"balance_frozen\": 0,\n    \"min_withdrawal\": 50000,\n    \"currency\": \"UZS\",\n    \"created_at\": \"2026-06-01T10:00:00.000Z\",\n    \"api_key\": {\n      \"name\": \"server\",\n      \"scopes\": [\n        \"account:read\",\n        \"offers:read\",\n        \"orders:read\"\n      ],\n      \"expires_at\": null\n    }\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            },
+            {
+              "name": "401 unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                },
+                "description": "Scope: `account:read`"
+              },
+              "status": "Error",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"unauthorized\",\n    \"message\": \"Invalid API key.\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "0718e614-0798-5465-970a-f3a9ce4df8b6",
+          "name": "Enums, scopes, statuses and business rules",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reference",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reference"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reference",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reference"
+                  ]
+                },
+                "description": "",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"api_version\": \"2026-10-23\",\n    \"base_url\": \"https://birinchishop.uz/api/v1\",\n    \"currency\": \"UZS (Uzbek som), integer amounts\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Offers",
+      "item": [
+        {
+          "id": "b40b5323-0da3-5ed2-8695-d179bcfbf5f4",
+          "name": "Search active offers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/offers?sort=best_selling&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offers"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "soat",
+                  "description": "Product search (Uzbek Latin/Cyrillic or Russian; synonyms and typos tolerated). Without sort — ordered by relevance.",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "best_selling",
+                  "description": "Sort order. Allowed: recommended, newest, best_selling, highest_payout, highest_stock, highest_lead_bonus."
+                },
+                {
+                  "key": "in_stock_only",
+                  "value": "true",
+                  "description": "Only offers with stock > 0.",
+                  "disabled": true
+                },
+                {
+                  "key": "min_sale_rate",
+                  "value": "25",
+                  "description": "Minimum sale_rate_percent (0-100).",
+                  "disabled": true
+                },
+                {
+                  "key": "min_payout",
+                  "value": "30000",
+                  "description": "Minimum payout, UZS.",
+                  "disabled": true
+                },
+                {
+                  "key": "ids",
+                  "value": "432,433",
+                  "description": "Comma-separated offer ids (max 100).",
+                  "disabled": true
+                },
+                {
+                  "key": "lang",
+                  "value": "uz",
+                  "description": "Language of offer name/description: uz (default, original), ru or en (translation; falls back to Uzbek). Allowed: uz, ru, en.",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (from 1).",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Items per page."
+                }
+              ]
+            },
+            "description": "Scope: `offers:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers?sort=best_selling&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "soat",
+                      "description": "Product search (Uzbek Latin/Cyrillic or Russian; synonyms and typos tolerated). Without sort — ordered by relevance.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "best_selling",
+                      "description": "Sort order. Allowed: recommended, newest, best_selling, highest_payout, highest_stock, highest_lead_bonus."
+                    },
+                    {
+                      "key": "in_stock_only",
+                      "value": "true",
+                      "description": "Only offers with stock > 0.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "min_sale_rate",
+                      "value": "25",
+                      "description": "Minimum sale_rate_percent (0-100).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "min_payout",
+                      "value": "30000",
+                      "description": "Minimum payout, UZS.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "ids",
+                      "value": "432,433",
+                      "description": "Comma-separated offer ids (max 100).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "lang",
+                      "value": "uz",
+                      "description": "Language of offer name/description: uz (default, original), ru or en (translation; falls back to Uzbek). Allowed: uz, ru, en.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number (from 1).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "Items per page."
+                    }
+                  ]
+                },
+                "description": "Scope: `offers:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 432,\n      \"name\": \"Smart watch X8\",\n      \"customer_price\": 199000,\n      \"customer_price_is_minimum\": false,\n      \"payout\": 50000,\n      \"payout_is_minimum\": false,\n      \"lead_bonus\": 0,\n      \"currency\": \"UZS\",\n      \"in_stock\": true,\n      \"stock\": 340,\n      \"sale_rate_percent\": 31,\n      \"sale_rate_tier\": \"good\",\n      \"payment_type\": \"after_delivery\",\n      \"image_url\": \"https://birinchishop.uz/uploads/example.jpg\",\n      \"video_url\": null,\n      \"has_variants\": true,\n      \"created_at\": \"2026-10-02T08:00:00.000Z\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 20,\n    \"total\": 1,\n    \"total_pages\": 1,\n    \"sort\": \"recommended\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            },
+            {
+              "name": "403 insufficient_scope",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers?sort=best_selling&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "soat",
+                      "description": "Product search (Uzbek Latin/Cyrillic or Russian; synonyms and typos tolerated). Without sort — ordered by relevance.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "best_selling",
+                      "description": "Sort order. Allowed: recommended, newest, best_selling, highest_payout, highest_stock, highest_lead_bonus."
+                    },
+                    {
+                      "key": "in_stock_only",
+                      "value": "true",
+                      "description": "Only offers with stock > 0.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "min_sale_rate",
+                      "value": "25",
+                      "description": "Minimum sale_rate_percent (0-100).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "min_payout",
+                      "value": "30000",
+                      "description": "Minimum payout, UZS.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "ids",
+                      "value": "432,433",
+                      "description": "Comma-separated offer ids (max 100).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "lang",
+                      "value": "uz",
+                      "description": "Language of offer name/description: uz (default, original), ru or en (translation; falls back to Uzbek). Allowed: uz, ru, en.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number (from 1).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "Items per page."
+                    }
+                  ]
+                },
+                "description": "Scope: `offers:read`"
+              },
+              "status": "Error",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"insufficient_scope\",\n    \"message\": \"This API key lacks the \\\"offers:read\\\" scope.\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "2df31869-57a5-5bb0-ac49-b9d39bf5ff48",
+          "name": "Offer details with variants and your links",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/offers/:offer_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offers",
+                ":offer_id"
+              ],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "uz",
+                  "description": "Language of offer name/description: uz (default, original), ru or en (translation; falls back to Uzbek). Allowed: uz, ru, en.",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "offer_id",
+                  "value": "{{offer_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `offers:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers/:offer_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers",
+                    ":offer_id"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "uz",
+                      "description": "Language of offer name/description: uz (default, original), ru or en (translation; falls back to Uzbek). Allowed: uz, ru, en.",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "offer_id",
+                      "value": "{{offer_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `offers:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 432,\n    \"name\": \"Smart watch X8\",\n    \"customer_price\": 199000,\n    \"customer_price_is_minimum\": false,\n    \"payout\": 50000,\n    \"payout_is_minimum\": false,\n    \"lead_bonus\": 0,\n    \"currency\": \"UZS\",\n    \"in_stock\": true,\n    \"stock\": 340,\n    \"sale_rate_percent\": 31,\n    \"sale_rate_tier\": \"good\",\n    \"payment_type\": \"after_delivery\",\n    \"image_url\": \"https://birinchishop.uz/uploads/example.jpg\",\n    \"video_url\": null,\n    \"has_variants\": true,\n    \"created_at\": \"2026-10-02T08:00:00.000Z\",\n    \"description\": \"Product description shown on the landing page.\",\n    \"images\": [\n      \"https://birinchishop.uz/uploads/example.jpg\"\n    ],\n    \"variants\": [\n      {\n        \"id\": 5101,\n        \"name\": \"Black\",\n        \"customer_price\": 199000,\n        \"payout\": 50000,\n        \"in_stock\": true,\n        \"image_url\": null,\n        \"types\": [\n          {\n            \"id\": 9001,\n            \"name\": \"42 mm\",\n            \"in_stock\": true\n          }\n        ]\n      }\n    ],\n    \"my_links\": [\n      {\n        \"id\": 2001,\n        \"name\": \"Instagram reels - November\",\n        \"offer_id\": 432,\n        \"offer_name\": \"Smart watch X8\",\n        \"offer_active\": true,\n        \"url\": \"https://birinchishop.uz/l/AbC123\",\n        \"tracking_url_template\": \"https://birinchishop.uz/l/AbC123?click_id={click_id}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}&sub5={sub5}\",\n        \"clicks\": 1520,\n        \"orders\": 64,\n        \"delivered\": 21,\n        \"created_at\": \"2026-11-01T06:12:00.000Z\"\n      }\n    ]\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Links",
+      "item": [
+        {
+          "id": "e5689c78-b0cc-5fcf-9330-7ca7149180ef",
+          "name": "List your tracking links",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/links?limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "links"
+              ],
+              "query": [
+                {
+                  "key": "offer_id",
+                  "value": "{{offer_id}}",
+                  "description": "Only links for this offer.",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (from 1).",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Items per page."
+                }
+              ]
+            },
+            "description": "Scope: `links:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "key": "offer_id",
+                      "value": "{{offer_id}}",
+                      "description": "Only links for this offer.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number (from 1).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "Items per page."
+                    }
+                  ]
+                },
+                "description": "Scope: `links:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 2001,\n      \"name\": \"Instagram reels - November\",\n      \"offer_id\": 432,\n      \"offer_name\": \"Smart watch X8\",\n      \"offer_active\": true,\n      \"url\": \"https://birinchishop.uz/l/AbC123\",\n      \"tracking_url_template\": \"https://birinchishop.uz/l/AbC123?click_id={click_id}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}&sub5={sub5}\",\n      \"clicks\": 1520,\n      \"orders\": 64,\n      \"delivered\": 21,\n      \"created_at\": \"2026-11-01T06:12:00.000Z\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 20,\n    \"total\": 1,\n    \"total_pages\": 1\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "9b7dec83-1b39-5cc3-99b4-07b64655e2f9",
+          "name": "Create a tracking link",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/links",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "links"
+              ]
+            },
+            "description": "Scope: `links:write`",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offer_id\": {{offer_id}},\n  \"name\": \"Instagram reels - November\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ]
+                },
+                "description": "Scope: `links:write`",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offer_id\": {{offer_id}},\n  \"name\": \"Instagram reels - November\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 2001,\n    \"name\": \"Instagram reels - November\",\n    \"offer_id\": 432,\n    \"offer_name\": \"Smart watch X8\",\n    \"offer_active\": true,\n    \"url\": \"https://birinchishop.uz/l/AbC123\",\n    \"tracking_url_template\": \"https://birinchishop.uz/l/AbC123?click_id={click_id}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}&sub5={sub5}\",\n    \"clicks\": 1520,\n    \"orders\": 64,\n    \"delivered\": 21,\n    \"created_at\": \"2026-11-01T06:12:00.000Z\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "4fb6176d-4006-5f6c-ba51-c58460ef9025",
+          "name": "One tracking link",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/links/:link_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "links",
+                ":link_id"
+              ],
+              "variable": [
+                {
+                  "key": "link_id",
+                  "value": "{{link_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `links:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links/:link_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":link_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "link_id",
+                      "value": "{{link_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `links:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 2001,\n    \"name\": \"Instagram reels - November\",\n    \"offer_id\": 432,\n    \"offer_name\": \"Smart watch X8\",\n    \"offer_active\": true,\n    \"url\": \"https://birinchishop.uz/l/AbC123\",\n    \"tracking_url_template\": \"https://birinchishop.uz/l/AbC123?click_id={click_id}&sub1={sub1}&sub2={sub2}&sub3={sub3}&sub4={sub4}&sub5={sub5}\",\n    \"clicks\": 1520,\n    \"orders\": 64,\n    \"delivered\": 21,\n    \"created_at\": \"2026-11-01T06:12:00.000Z\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "id": "e54463ee-52a9-54bf-bc38-7e0b2dbe7b9f",
+          "name": "List your orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders?limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "delivered",
+                  "description": "Order status. Allowed: new, processing, callback, confirmed, packed, shipping, delivered, returned, cancelled.",
+                  "disabled": true
+                },
+                {
+                  "key": "conversion_status",
+                  "value": "sale",
+                  "description": "Status group. Allowed: lead, approved, sale, rejected.",
+                  "disabled": true
+                },
+                {
+                  "key": "date_from",
+                  "value": "2026-11-01",
+                  "description": "Created on/after (Asia/Tashkent), YYYY-MM-DD.",
+                  "disabled": true
+                },
+                {
+                  "key": "date_to",
+                  "value": "2026-11-18",
+                  "description": "Created on/before (Asia/Tashkent), YYYY-MM-DD.",
+                  "disabled": true
+                },
+                {
+                  "key": "updated_since",
+                  "value": "2026-11-18T00:00:00Z",
+                  "description": "ISO 8601 datetime. Returns orders updated after it, ordered by updated_at ascending (incremental sync).",
+                  "disabled": true
+                },
+                {
+                  "key": "link_id",
+                  "value": "{{link_id}}",
+                  "description": "Filter by link.",
+                  "disabled": true
+                },
+                {
+                  "key": "offer_id",
+                  "value": "{{offer_id}}",
+                  "description": "Filter by offer.",
+                  "disabled": true
+                },
+                {
+                  "key": "click_id",
+                  "value": "abc123clk",
+                  "description": "Filter by tracker click id.",
+                  "disabled": true
+                },
+                {
+                  "key": "external_id",
+                  "value": "crm-1001",
+                  "description": "Filter by your external id.",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (from 1).",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Items per page."
+                }
+              ]
+            },
+            "description": "Scope: `orders:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "delivered",
+                      "description": "Order status. Allowed: new, processing, callback, confirmed, packed, shipping, delivered, returned, cancelled.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "conversion_status",
+                      "value": "sale",
+                      "description": "Status group. Allowed: lead, approved, sale, rejected.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2026-11-01",
+                      "description": "Created on/after (Asia/Tashkent), YYYY-MM-DD.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2026-11-18",
+                      "description": "Created on/before (Asia/Tashkent), YYYY-MM-DD.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "2026-11-18T00:00:00Z",
+                      "description": "ISO 8601 datetime. Returns orders updated after it, ordered by updated_at ascending (incremental sync).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "link_id",
+                      "value": "{{link_id}}",
+                      "description": "Filter by link.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "offer_id",
+                      "value": "{{offer_id}}",
+                      "description": "Filter by offer.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "click_id",
+                      "value": "abc123clk",
+                      "description": "Filter by tracker click id.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "crm-1001",
+                      "description": "Filter by your external id.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number (from 1).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "Items per page."
+                    }
+                  ]
+                },
+                "description": "Scope: `orders:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 880123,\n      \"status\": \"shipping\",\n      \"conversion_status\": \"approved\",\n      \"created_at\": \"2026-11-18T09:30:00.000Z\",\n      \"updated_at\": \"2026-11-18T09:30:00.000Z\",\n      \"offer\": {\n        \"id\": 432,\n        \"name\": \"Smart watch X8\"\n      },\n      \"link\": {\n        \"id\": 2001,\n        \"name\": \"Instagram reels - November\"\n      },\n      \"variant\": {\n        \"id\": 5101,\n        \"name\": \"Black\",\n        \"type_id\": 9001,\n        \"type_name\": \"42 mm\"\n      },\n      \"customer\": {\n        \"name\": \"Ali\",\n        \"phone_masked\": \"+998 ** *** 45 67\",\n        \"region\": \"Toshkent shahri\"\n      },\n      \"customer_price\": 199000,\n      \"payout\": 50000,\n      \"payout_status\": \"pending\",\n      \"currency\": \"UZS\",\n      \"delivery_date\": \"2026-11-20\",\n      \"operator_note\": null,\n      \"courier_note\": null,\n      \"source\": \"api\",\n      \"sale_chance_percent\": 64,\n      \"tracking\": {\n        \"click_id\": \"abc123clk\",\n        \"sub1\": \"reels\",\n        \"sub2\": null,\n        \"sub3\": null,\n        \"sub4\": null,\n        \"sub5\": null,\n        \"external_id\": \"crm-1001\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 20,\n    \"total\": 1,\n    \"total_pages\": 1\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            },
+            {
+              "name": "429 rate_limited",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "delivered",
+                      "description": "Order status. Allowed: new, processing, callback, confirmed, packed, shipping, delivered, returned, cancelled.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "conversion_status",
+                      "value": "sale",
+                      "description": "Status group. Allowed: lead, approved, sale, rejected.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2026-11-01",
+                      "description": "Created on/after (Asia/Tashkent), YYYY-MM-DD.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2026-11-18",
+                      "description": "Created on/before (Asia/Tashkent), YYYY-MM-DD.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "2026-11-18T00:00:00Z",
+                      "description": "ISO 8601 datetime. Returns orders updated after it, ordered by updated_at ascending (incremental sync).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "link_id",
+                      "value": "{{link_id}}",
+                      "description": "Filter by link.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "offer_id",
+                      "value": "{{offer_id}}",
+                      "description": "Filter by offer.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "click_id",
+                      "value": "abc123clk",
+                      "description": "Filter by tracker click id.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "crm-1001",
+                      "description": "Filter by your external id.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number (from 1).",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "Items per page."
+                    }
+                  ]
+                },
+                "description": "Scope: `orders:read`"
+              },
+              "status": "Error",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"rate_limited\",\n    \"message\": \"Rate limit exceeded (120 requests per minute per key).\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "a2eb1aec-162f-58c3-8bf8-ab6eeb180b5c",
+          "name": "One order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:order_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "variable": [
+                {
+                  "key": "order_id",
+                  "value": "{{order_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `orders:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:order_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "order_id",
+                      "value": "{{order_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `orders:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 880123,\n    \"status\": \"shipping\",\n    \"conversion_status\": \"approved\",\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"updated_at\": \"2026-11-18T09:30:00.000Z\",\n    \"offer\": {\n      \"id\": 432,\n      \"name\": \"Smart watch X8\"\n    },\n    \"link\": {\n      \"id\": 2001,\n      \"name\": \"Instagram reels - November\"\n    },\n    \"variant\": {\n      \"id\": 5101,\n      \"name\": \"Black\",\n      \"type_id\": 9001,\n      \"type_name\": \"42 mm\"\n    },\n    \"customer\": {\n      \"name\": \"Ali\",\n      \"phone_masked\": \"+998 ** *** 45 67\",\n      \"region\": \"Toshkent shahri\"\n    },\n    \"customer_price\": 199000,\n    \"payout\": 50000,\n    \"payout_status\": \"pending\",\n    \"currency\": \"UZS\",\n    \"delivery_date\": \"2026-11-20\",\n    \"operator_note\": null,\n    \"courier_note\": null,\n    \"source\": \"api\",\n    \"sale_chance_percent\": 64,\n    \"tracking\": {\n      \"click_id\": \"abc123clk\",\n      \"sub1\": \"reels\",\n      \"sub2\": null,\n      \"sub3\": null,\n      \"sub4\": null,\n      \"sub5\": null,\n      \"external_id\": \"crm-1001\"\n    }\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "e774eae5-2bd7-50ac-a406-e83a02ef8713",
+          "name": "Probability that the order gets delivered",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:order_id/sale-chance",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":order_id",
+                "sale-chance"
+              ],
+              "variable": [
+                {
+                  "key": "order_id",
+                  "value": "{{order_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `insights:read`\n\nEstimate 0-100% from the offer sale rate, the order stage, the customer's previous orders across the network, duplicates and rejected leads. The latest value is also in Order.sale_chance_percent."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:order_id/sale-chance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":order_id",
+                    "sale-chance"
+                  ],
+                  "variable": [
+                    {
+                      "key": "order_id",
+                      "value": "{{order_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `insights:read`\n\nEstimate 0-100% from the offer sale rate, the order stage, the customer's previous orders across the network, duplicates and rejected leads. The latest value is also in Order.sale_chance_percent."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"order_id\": 880123,\n    \"percent\": 64,\n    \"level\": \"mid\",\n    \"final\": false,\n    \"factors\": [\n      {\n        \"factor\": \"offer\"\n      },\n      {\n        \"factor\": \"stage\"\n      }\n    ],\n    \"computed_at\": \"2026-11-18T09:30:00.000Z\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "e9962254-78e9-56fb-8ecc-5efae829d08c",
+          "name": "Submit a real customer order (lead)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}",
+                "description": "Same key on retry => the existing order is returned (200, Idempotent-Replayed: true)."
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Scope: `orders:write`\n\n**⚠ Creates a REAL order.** A call center phones the customer and a courier delivers the product. Only for a real customer who asked to order, with their correct phone number. Never send test, sample or fake orders — the account gets blocked.\n\n`customer_phone` is empty in the environment on purpose, so an accidental Send fails with `invalid_request`. `Idempotency-Key` uses `{{$guid}}`; when you retry the same order, send the same key so no duplicate is created.\n\nCreates a REAL order; a call center will phone the customer. Never send test or fake orders. Send an `Idempotency-Key` header so that retries never create duplicates (a replay returns 200 with header `Idempotent-Replayed: true`).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"link_id\": {{link_id}},\n  \"phone\": \"{{customer_phone}}\",\n  \"name\": \"{{customer_name}}\",\n  \"region\": \"Toshkent shahri\",\n  \"external_id\": \"crm-1001\",\n  \"click_id\": \"abc123clk\",\n  \"sub1\": \"reels\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}",
+                    "description": "Same key on retry => the existing order is returned (200, Idempotent-Replayed: true)."
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                },
+                "description": "Scope: `orders:write`\n\n**⚠ Creates a REAL order.** A call center phones the customer and a courier delivers the product. Only for a real customer who asked to order, with their correct phone number. Never send test, sample or fake orders — the account gets blocked.\n\n`customer_phone` is empty in the environment on purpose, so an accidental Send fails with `invalid_request`. `Idempotency-Key` uses `{{$guid}}`; when you retry the same order, send the same key so no duplicate is created.\n\nCreates a REAL order; a call center will phone the customer. Never send test or fake orders. Send an `Idempotency-Key` header so that retries never create duplicates (a replay returns 200 with header `Idempotent-Replayed: true`).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"link_id\": {{link_id}},\n  \"phone\": \"{{customer_phone}}\",\n  \"name\": \"{{customer_name}}\",\n  \"region\": \"Toshkent shahri\",\n  \"external_id\": \"crm-1001\",\n  \"click_id\": \"abc123clk\",\n  \"sub1\": \"reels\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 880123,\n    \"status\": \"new\",\n    \"conversion_status\": \"lead\",\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"updated_at\": \"2026-11-18T09:30:00.000Z\",\n    \"offer\": {\n      \"id\": 432,\n      \"name\": \"Smart watch X8\"\n    },\n    \"link\": {\n      \"id\": 2001,\n      \"name\": \"Instagram reels - November\"\n    },\n    \"variant\": {\n      \"id\": 5101,\n      \"name\": \"Black\",\n      \"type_id\": 9001,\n      \"type_name\": \"42 mm\"\n    },\n    \"customer\": {\n      \"name\": \"Ali\",\n      \"phone_masked\": \"+998 ** *** 45 67\",\n      \"region\": \"Toshkent shahri\"\n    },\n    \"customer_price\": 199000,\n    \"payout\": 50000,\n    \"payout_status\": \"pending\",\n    \"currency\": \"UZS\",\n    \"delivery_date\": null,\n    \"operator_note\": null,\n    \"courier_note\": null,\n    \"source\": \"api\",\n    \"sale_chance_percent\": null,\n    \"tracking\": {\n      \"click_id\": \"abc123clk\",\n      \"sub1\": \"reels\",\n      \"sub2\": null,\n      \"sub3\": null,\n      \"sub4\": null,\n      \"sub5\": null,\n      \"external_id\": \"crm-1001\"\n    }\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            },
+            {
+              "name": "409 duplicate_order",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}",
+                    "description": "Same key on retry => the existing order is returned (200, Idempotent-Replayed: true)."
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                },
+                "description": "Scope: `orders:write`\n\n**⚠ Creates a REAL order.** A call center phones the customer and a courier delivers the product. Only for a real customer who asked to order, with their correct phone number. Never send test, sample or fake orders — the account gets blocked.\n\n`customer_phone` is empty in the environment on purpose, so an accidental Send fails with `invalid_request`. `Idempotency-Key` uses `{{$guid}}`; when you retry the same order, send the same key so no duplicate is created.\n\nCreates a REAL order; a call center will phone the customer. Never send test or fake orders. Send an `Idempotency-Key` header so that retries never create duplicates (a replay returns 200 with header `Idempotent-Replayed: true`).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"link_id\": {{link_id}},\n  \"phone\": \"{{customer_phone}}\",\n  \"name\": \"{{customer_name}}\",\n  \"region\": \"Toshkent shahri\",\n  \"external_id\": \"crm-1001\",\n  \"click_id\": \"abc123clk\",\n  \"sub1\": \"reels\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Error",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"duplicate_order\",\n    \"message\": \"This phone number already has an order for this offer in the last 24 hours\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            },
+            {
+              "name": "403 orders_write_not_allowed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}",
+                    "description": "Same key on retry => the existing order is returned (200, Idempotent-Replayed: true)."
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                },
+                "description": "Scope: `orders:write`\n\n**⚠ Creates a REAL order.** A call center phones the customer and a courier delivers the product. Only for a real customer who asked to order, with their correct phone number. Never send test, sample or fake orders — the account gets blocked.\n\n`customer_phone` is empty in the environment on purpose, so an accidental Send fails with `invalid_request`. `Idempotency-Key` uses `{{$guid}}`; when you retry the same order, send the same key so no duplicate is created.\n\nCreates a REAL order; a call center will phone the customer. Never send test or fake orders. Send an `Idempotency-Key` header so that retries never create duplicates (a replay returns 200 with header `Idempotent-Replayed: true`).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"link_id\": {{link_id}},\n  \"phone\": \"{{customer_phone}}\",\n  \"name\": \"{{customer_name}}\",\n  \"region\": \"Toshkent shahri\",\n  \"external_id\": \"crm-1001\",\n  \"click_id\": \"abc123clk\",\n  \"sub1\": \"reels\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Error",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"orders_write_not_allowed\",\n    \"message\": \"Sending orders via API requires at least 3 delivered orders on the account, or admin approval.\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stats & events",
+      "item": [
+        {
+          "id": "5d9dd4c0-c2db-53b2-8cae-c459f17c3475",
+          "name": "Aggregated statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stats?group_by=offer&date_from=2026-11-01&date_to=2026-11-18",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stats"
+              ],
+              "query": [
+                {
+                  "key": "group_by",
+                  "value": "offer",
+                  "description": "Grouping. Allowed: day, offer, link."
+                },
+                {
+                  "key": "date_from",
+                  "value": "2026-11-01",
+                  "description": "YYYY-MM-DD (Asia/Tashkent). Default: 29 days before date_to."
+                },
+                {
+                  "key": "date_to",
+                  "value": "2026-11-18",
+                  "description": "YYYY-MM-DD (Asia/Tashkent). Default: today."
+                },
+                {
+                  "key": "link_id",
+                  "value": "{{link_id}}",
+                  "description": "Filter by link.",
+                  "disabled": true
+                },
+                {
+                  "key": "offer_id",
+                  "value": "{{offer_id}}",
+                  "description": "Filter by offer.",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Scope: `stats:read`\n\nRows exist only for groups with orders. meta.totals also has clicks and unique_clicks for the whole range (including groups without orders); meta.clicks_since is the date (Asia/Tashkent) the click log started — clicks before it are not available."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/stats?group_by=offer&date_from=2026-11-01&date_to=2026-11-18",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stats"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_by",
+                      "value": "offer",
+                      "description": "Grouping. Allowed: day, offer, link."
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2026-11-01",
+                      "description": "YYYY-MM-DD (Asia/Tashkent). Default: 29 days before date_to."
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2026-11-18",
+                      "description": "YYYY-MM-DD (Asia/Tashkent). Default: today."
+                    },
+                    {
+                      "key": "link_id",
+                      "value": "{{link_id}}",
+                      "description": "Filter by link.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "offer_id",
+                      "value": "{{offer_id}}",
+                      "description": "Filter by offer.",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Scope: `stats:read`\n\nRows exist only for groups with orders. meta.totals also has clicks and unique_clicks for the whole range (including groups without orders); meta.clicks_since is the date (Asia/Tashkent) the click log started — clicks before it are not available."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"offer_id\": 432,\n      \"offer_name\": \"Smart watch X8\",\n      \"orders\": 64,\n      \"approved\": 40,\n      \"delivered\": 21,\n      \"rejected\": 12,\n      \"pending\": 31,\n      \"approval_rate_percent\": 63,\n      \"delivery_rate_percent\": 33,\n      \"earned\": 1050000,\n      \"potential_earnings\": 950000,\n      \"clicks\": 1520,\n      \"unique_clicks\": 1210\n    }\n  ],\n  \"meta\": {\n    \"group_by\": \"offer\",\n    \"date_from\": \"2026-11-01\",\n    \"date_to\": \"2026-11-18\",\n    \"timezone\": \"Asia/Tashkent\",\n    \"currency\": \"UZS\",\n    \"totals\": {\n      \"orders\": 64,\n      \"delivered\": 21,\n      \"earned\": 1050000,\n      \"clicks\": 1520,\n      \"unique_clicks\": 1210\n    },\n    \"clicks_since\": \"2026-11-05\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "00ba1d40-b812-5090-b07b-db9249b7fc22",
+          "name": "Order events feed (cursor-based)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?after=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "after",
+                  "value": "0",
+                  "description": "Cursor: return events with id greater than this."
+                },
+                {
+                  "key": "type",
+                  "value": "order.status_changed",
+                  "description": "Event type. Allowed: order.created, order.status_changed.",
+                  "disabled": true
+                },
+                {
+                  "key": "include_order",
+                  "value": "false",
+                  "description": "Embed the current order.",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Max events."
+                }
+              ]
+            },
+            "description": "Scope: `events:read`\n\nPoll this instead of (or in addition to) webhooks. Store meta.next_cursor and pass it as `after` next time. Events are kept for 90 days."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?after=0&limit=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "0",
+                      "description": "Cursor: return events with id greater than this."
+                    },
+                    {
+                      "key": "type",
+                      "value": "order.status_changed",
+                      "description": "Event type. Allowed: order.created, order.status_changed.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "include_order",
+                      "value": "false",
+                      "description": "Embed the current order.",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100",
+                      "description": "Max events."
+                    }
+                  ]
+                },
+                "description": "Scope: `events:read`\n\nPoll this instead of (or in addition to) webhooks. Store meta.next_cursor and pass it as `after` next time. Events are kept for 90 days."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 55012,\n      \"type\": \"order.status_changed\",\n      \"created_at\": \"2026-11-18T09:30:00.000Z\",\n      \"order_id\": 880123,\n      \"status\": \"shipping\",\n      \"previous_status\": \"packed\",\n      \"conversion_status\": \"approved\"\n    }\n  ],\n  \"meta\": {\n    \"next_cursor\": 55012,\n    \"has_more\": false\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI manager",
+      "item": [
+        {
+          "id": "39e11cd0-b130-5492-babf-a0560706fe31",
+          "name": "AI manager: today's overview and recommendations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/insights",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "insights"
+              ]
+            },
+            "description": "Scope: `insights:read`\n\nYesterday's results, last 7 days vs previous week, promoted offers with sale rates and stock, Meta campaigns, suggested offers and prioritized recommendations (type + hint). Also the morning brief text."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                },
+                "description": "Scope: `insights:read`\n\nYesterday's results, last 7 days vs previous week, promoted offers with sale rates and stock, Meta campaigns, suggested offers and prioritized recommendations (type + hint). Also the morning brief text."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"day\": \"2026-11-18\",\n    \"yesterday\": {},\n    \"week\": {},\n    \"pending\": {},\n    \"balance\": {},\n    \"my_offers\": [],\n    \"suggested_offers\": [],\n    \"campaigns\": [],\n    \"recommendations\": [\n      {\n        \"type\": \"try_offers\",\n        \"priority\": 3,\n        \"hint\": \"Try best-selling offers\"\n      }\n    ],\n    \"morning_brief\": null\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Meta ads",
+      "item": [
+        {
+          "id": "24dc4928-4a0c-5b24-9b2c-9b919e10ceeb",
+          "name": "Meta ad account connection",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ads/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ads",
+                "status"
+              ]
+            },
+            "description": "Scope: `ads:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ads/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ads",
+                    "status"
+                  ]
+                },
+                "description": "Scope: `ads:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"connected\": false,\n    \"hint\": \"Connect a Meta ad account in the partner panel (/dashboard/meta-ads).\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "bfec9c79-4567-53b1-9b3c-9f66a0b4e95a",
+          "name": "Meta campaigns with results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ads/campaigns?period=7d",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ads",
+                "campaigns"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "7d",
+                  "description": "Stats period. Allowed: 7d, 30d, 90d."
+                },
+                {
+                  "key": "include_archived",
+                  "value": "false",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Scope: `ads:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ads/campaigns?period=7d",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ads",
+                    "campaigns"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "7d",
+                      "description": "Stats period. Allowed: 7d, 30d, 90d."
+                    },
+                    {
+                      "key": "include_archived",
+                      "value": "false",
+                      "description": "",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Scope: `ads:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 15,\n      \"name\": \"Smart watch - leads\",\n      \"status\": \"active\",\n      \"offer_name\": \"Smart watch X8\",\n      \"daily_budget\": 10,\n      \"delivery_status\": \"active\",\n      \"problem\": null,\n      \"paused_reason\": null,\n      \"stats\": {\n        \"spend_uzs\": 1250000,\n        \"spend_today_uzs\": 120000,\n        \"orders\": 48,\n        \"approved\": 30,\n        \"delivered\": 18,\n        \"cost_per_order_uzs\": 26042,\n        \"cost_per_delivered_uzs\": 69444,\n        \"net_profit_uzs\": -350000,\n        \"likely_revenue_uzs\": 1400000\n      }\n    }\n  ],\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "e60a7947-8fb6-53a1-a1f6-a891d409197c",
+          "name": "Pause a campaign (immediate)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/pause",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ads",
+                "campaigns",
+                ":campaign_id",
+                "pause"
+              ],
+              "variable": [
+                {
+                  "key": "campaign_id",
+                  "value": "{{campaign_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `ads:write`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/pause",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ads",
+                    "campaigns",
+                    ":campaign_id",
+                    "pause"
+                  ],
+                  "variable": [
+                    {
+                      "key": "campaign_id",
+                      "value": "{{campaign_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `ads:write`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 15,\n    \"status\": \"paused\",\n    \"changed\": true\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "f2a2e00d-c06a-541f-89c6-f11a1e31957e",
+          "name": "Request to resume (needs partner confirmation)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/resume",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ads",
+                "campaigns",
+                ":campaign_id",
+                "resume"
+              ],
+              "variable": [
+                {
+                  "key": "campaign_id",
+                  "value": "{{campaign_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `ads:write`"
+          },
+          "response": [
+            {
+              "name": "202 Confirmation card sent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/resume",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ads",
+                    "campaigns",
+                    ":campaign_id",
+                    "resume"
+                  ],
+                  "variable": [
+                    {
+                      "key": "campaign_id",
+                      "value": "{{campaign_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `ads:write`"
+              },
+              "status": "OK",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 77,\n    \"kind\": \"resume_campaign\",\n    \"status\": \"pending_confirmation\",\n    \"campaign_id\": 15,\n    \"title\": \"Resume campaign\",\n    \"details\": [],\n    \"result\": null,\n    \"expires_at\": \"2026-11-18T10:00:00.000Z\",\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"decided_at\": null\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "831d8fb1-e0c3-5665-938d-eb5c42db9c6f",
+          "name": "Request a daily budget change (needs partner confirmation)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/budget",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ads",
+                "campaigns",
+                ":campaign_id",
+                "budget"
+              ],
+              "variable": [
+                {
+                  "key": "campaign_id",
+                  "value": "{{campaign_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `ads:write`",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"daily_budget\": 150000,\n  \"unit\": \"UZS\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "202 Confirmation card sent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ads/campaigns/:campaign_id/budget",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ads",
+                    "campaigns",
+                    ":campaign_id",
+                    "budget"
+                  ],
+                  "variable": [
+                    {
+                      "key": "campaign_id",
+                      "value": "{{campaign_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `ads:write`",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"daily_budget\": 150000,\n  \"unit\": \"UZS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 77,\n    \"kind\": \"change_budget\",\n    \"status\": \"pending_confirmation\",\n    \"campaign_id\": 15,\n    \"title\": \"Change daily budget\",\n    \"details\": [\n      {\n        \"label\": \"Daily budget\",\n        \"value\": \"150 000 UZS\"\n      }\n    ],\n    \"result\": null,\n    \"expires_at\": \"2026-11-18T10:00:00.000Z\",\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"decided_at\": null\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "8924a8dd-d423-5704-84b1-447b374a568e",
+          "name": "Status of a confirmation request",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/actions/:action_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "actions",
+                ":action_id"
+              ],
+              "variable": [
+                {
+                  "key": "action_id",
+                  "value": "{{action_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `ads:read`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/actions/:action_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "actions",
+                    ":action_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "action_id",
+                      "value": "{{action_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `ads:read`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 77,\n    \"kind\": \"change_budget\",\n    \"status\": \"done\",\n    \"campaign_id\": 15,\n    \"title\": \"Change daily budget\",\n    \"details\": [\n      {\n        \"label\": \"Daily budget\",\n        \"value\": \"150 000 UZS\"\n      }\n    ],\n    \"result\": \"ok\",\n    \"expires_at\": \"2026-11-18T10:00:00.000Z\",\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"decided_at\": \"2026-11-18T09:30:00.000Z\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Webhooks & postbacks",
+      "item": [
+        {
+          "id": "a00f5871-3cf5-50be-89ea-e64d5d7d4eb3",
+          "name": "List webhooks/postbacks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Scope: `webhooks:manage`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 31,\n      \"kind\": \"postback\",\n      \"url\": \"https://tracker.example.com/postback?subid={click_id}&status={conversion_status}&payout={payout}\",\n      \"events\": [\n        \"order.created\",\n        \"order.status_changed\"\n      ],\n      \"description\": \"Tracker\",\n      \"is_active\": true,\n      \"disabled_reason\": null,\n      \"consecutive_failures\": 0,\n      \"last_success_at\": \"2026-11-18T09:30:00.000Z\",\n      \"last_failure_at\": null,\n      \"created_at\": \"2026-11-18T09:30:00.000Z\"\n    }\n  ],\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "733a4a9a-04c2-5c44-a0d7-c1678224c1cc",
+          "name": "Add a webhook or S2S postback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Scope: `webhooks:manage`\n\nkind=json: we POST a signed JSON event. kind=postback: we GET your URL after replacing macros like {click_id}, {status}, {conversion_status}, {payout}. Only public http(s) URLs on ports 80/443/8080/8443. The signing secret is returned ONCE in this response.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"postback\",\n  \"url\": \"https://tracker.example.com/postback?subid={click_id}&status={conversion_status}&payout={payout}&currency={currency}\",\n  \"events\": [\n    \"order.created\",\n    \"order.status_changed\"\n  ],\n  \"description\": \"Tracker\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`\n\nkind=json: we POST a signed JSON event. kind=postback: we GET your URL after replacing macros like {click_id}, {status}, {conversion_status}, {payout}. Only public http(s) URLs on ports 80/443/8080/8443. The signing secret is returned ONCE in this response.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"postback\",\n  \"url\": \"https://tracker.example.com/postback?subid={click_id}&status={conversion_status}&payout={payout}&currency={currency}\",\n  \"events\": [\n    \"order.created\",\n    \"order.status_changed\"\n  ],\n  \"description\": \"Tracker\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 31,\n    \"kind\": \"json\",\n    \"url\": \"https://example.com/hooks/birinchishop\",\n    \"events\": [\n      \"order.created\",\n      \"order.status_changed\"\n    ],\n    \"description\": null,\n    \"is_active\": true,\n    \"disabled_reason\": null,\n    \"consecutive_failures\": 0,\n    \"last_success_at\": null,\n    \"last_failure_at\": null,\n    \"created_at\": \"2026-11-18T09:30:00.000Z\",\n    \"secret\": \"whsec_shown_once_store_it\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "46e17f45-1b1f-57f9-9551-c51372c70a0b",
+          "name": "Update / re-enable a webhook",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/:webhook_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                ":webhook_id"
+              ],
+              "variable": [
+                {
+                  "key": "webhook_id",
+                  "value": "{{webhook_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `webhooks:manage`",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhook_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "webhook_id",
+                      "value": "{{webhook_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 31,\n    \"kind\": \"postback\",\n    \"url\": \"https://tracker.example.com/postback?subid={click_id}&status={conversion_status}&payout={payout}\",\n    \"events\": [\n      \"order.created\",\n      \"order.status_changed\"\n    ],\n    \"description\": \"Tracker\",\n    \"is_active\": true,\n    \"disabled_reason\": null,\n    \"consecutive_failures\": 0,\n    \"last_success_at\": \"2026-11-18T09:30:00.000Z\",\n    \"last_failure_at\": null,\n    \"created_at\": \"2026-11-18T09:30:00.000Z\"\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "f5205162-aeeb-5184-89fe-c84a6d9e770f",
+          "name": "Delete a webhook",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/:webhook_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                ":webhook_id"
+              ],
+              "variable": [
+                {
+                  "key": "webhook_id",
+                  "value": "{{webhook_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `webhooks:manage`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhook_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "webhook_id",
+                      "value": "{{webhook_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 31,\n    \"deleted\": true\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "2fb7a6fe-718b-52ba-8d40-111db0d45be2",
+          "name": "Send a sample event now",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/:webhook_id/test",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                ":webhook_id",
+                "test"
+              ],
+              "variable": [
+                {
+                  "key": "webhook_id",
+                  "value": "{{webhook_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `webhooks:manage`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhook_id/test",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhook_id",
+                    "test"
+                  ],
+                  "variable": [
+                    {
+                      "key": "webhook_id",
+                      "value": "{{webhook_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"ok\": true,\n    \"response_code\": 200,\n    \"response_snippet\": \"ok\",\n    \"error\": null,\n    \"duration_ms\": 184\n  },\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        },
+        {
+          "id": "50b40511-bad2-5e7d-8fd2-435265d86db0",
+          "name": "Recent delivery attempts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/:webhook_id/deliveries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                ":webhook_id",
+                "deliveries"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Max rows.",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "webhook_id",
+                  "value": "{{webhook_id}}"
+                }
+              ]
+            },
+            "description": "Scope: `webhooks:manage`"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhook_id/deliveries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhook_id",
+                    "deliveries"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50",
+                      "description": "Max rows.",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "webhook_id",
+                      "value": "{{webhook_id}}"
+                    }
+                  ]
+                },
+                "description": "Scope: `webhooks:manage`"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 9001,\n      \"event_id\": 55012,\n      \"status\": \"delivered\",\n      \"attempts\": 1,\n      \"response_code\": 200,\n      \"response_snippet\": \"ok\",\n      \"error\": null,\n      \"duration_ms\": 120,\n      \"next_attempt_at\": null,\n      \"created_at\": \"2026-11-18T09:30:00.000Z\",\n      \"delivered_at\": \"2026-11-18T09:30:00.000Z\"\n    }\n  ],\n  \"request_id\": \"req_Ab12Cd34Ef56\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://birinchishop.uz/api/v1",
+      "type": "string"
+    }
+  ]
+}
