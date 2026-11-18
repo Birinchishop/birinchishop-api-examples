@@ -37,7 +37,7 @@ curl -s https://birinchishop.uz/api/v1/webhooks \
   -d '{
     "kind": "postback",
     "description": "Keitaro",
-    "url": "https://tracker.example.com/POSTBACK_KEY/postback?subid={click_id}&status={conversion_status}&payout={payout}&currency={currency}&lead_status=lead,approved&sale_status=sale&rejected_status=rejected"
+    "url": "https://tracker.example.com/POSTBACK_KEY/postback?subid={click_id}&status={conversion_status}&payout={payout_earned}&currency={currency}&lead_status=lead,approved&sale_status=sale&rejected_status=rejected"
   }'
 ```
 
@@ -47,7 +47,7 @@ curl -s https://birinchishop.uz/api/v1/webhooks \
 - Postbacks for the same click update the conversion as the order moves on (lead → sale or rejected).
   If one click can produce several orders, Keitaro's `tid` parameter (for example `&tid={order_id}`) records them as separate
   conversions — check in your Keitaro how repeated postbacks with the same `tid` are handled before relying on it.
-- `{payout}` is the order's payout in UZS in **every** postback, including `lead` and `rejected`. The money is earned only on `sale`.
+- `{payout_earned}` is the payout in UZS on `sale` and `0` on every other status — use it for revenue. `{payout}` is the order's payout in **every** postback, including `lead` and `rejected` (the money is earned only on `sale`).
 - `{currency}` is always `UZS`.
 
 ## 3. What we send
@@ -61,7 +61,8 @@ We call the URL with **GET** on every order event (`order.created`, `order.statu
 | `{external_id}` | Your own id from `POST /orders` (empty otherwise) |
 | `{status}` | Detailed status: `new`, `processing`, `callback`, `confirmed`, `packed`, `shipping`, `delivered`, `returned`, `cancelled` |
 | `{conversion_status}` | `lead` / `approved` / `sale` / `rejected` |
-| `{payout}` | Partner payout for the order, UZS |
+| `{payout_earned}` | Payout actually earned: the order's payout on `sale`, `0` otherwise, UZS |
+| `{payout}` | Partner payout for the order (same on every status), UZS |
 | `{customer_price}` | Price paid by the customer, UZS (without delivery) |
 | `{currency}` | `UZS` |
 | `{offer_id}`, `{link_id}` | Ids of the offer and the link |

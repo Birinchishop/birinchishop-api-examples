@@ -38,14 +38,14 @@ curl -s https://birinchishop.uz/api/v1/webhooks \
   -d '{
     "kind": "postback",
     "description": "Binom",
-    "url": "https://binom.example.com/click?cnv_id={click_id}&payout={payout}&cnv_status={conversion_status}&cnv_status2={status}&cnv_currency={currency}"
+    "url": "https://binom.example.com/click?cnv_id={click_id}&payout={payout_earned}&cnv_status={conversion_status}&cnv_status2={status}&cnv_currency={currency}"
   }'
 ```
 
 | Binom parameter | Our macro | Notes |
 |---|---|---|
 | `cnv_id` | `{click_id}` | Required — the `{clickid}` Binom put into the tracking link |
-| `payout` | `{payout}` | Partner payout for the order, UZS |
+| `payout` | `{payout_earned}` | Payout earned: the order's payout on `sale`, `0` on other statuses, UZS |
 | `cnv_status` | `{conversion_status}` | `lead` / `approved` / `sale` / `rejected` |
 | `cnv_status2` | `{status}` | Detailed status (optional, useful for reports) |
 | `cnv_currency` | `{currency}` | Always `UZS` |
@@ -53,9 +53,9 @@ curl -s https://birinchishop.uz/api/v1/webhooks \
 Important:
 
 - Binom stores the status text as sent. Build reports or filters on `cnv_status = sale` to see earned money.
-- `{payout}` is the order's payout in **every** postback, including `lead` and `rejected`. Binom replaces a click's payout with the
-  one from the latest postback, so a lead already shows the payout before delivery. Count revenue only for `sale`
-  (for example with Binom's status-based payout settings, or by filtering reports on `cnv_status`).
+- Use `{payout_earned}`, not `{payout}`: Binom replaces a click's payout with the one from the latest postback.
+  `{payout_earned}` is `0` for `lead`/`approved`/`rejected` and the order's payout on `sale`, so revenue is counted only
+  for delivered orders. `{payout}` carries the order's payout on every status.
 - Do not turn on Binom's *Upsell* option for this offer: it sums payouts of repeated postbacks for the same click,
   and we send one postback per status change.
 
@@ -71,7 +71,7 @@ Important:
 An order can move back (for example `delivered` → `returned`); the next postback brings the new status.
 
 All macros we can substitute: `{click_id}` `{sub1}`…`{sub5}` `{order_id}` `{external_id}` `{status}` `{conversion_status}`
-`{payout}` `{customer_price}` `{currency}` `{offer_id}` `{link_id}` `{event}` `{event_id}` `{timestamp}` —
+`{payout}` `{payout_earned}` `{customer_price}` `{currency}` `{offer_id}` `{link_id}` `{event}` `{event_id}` `{timestamp}` —
 see the table in [keitaro.md](keitaro.md#3-what-we-send).
 
 ## 4. Check it
