@@ -24,7 +24,7 @@ and pays a fixed amount for every **delivered** order.
 | [`integrations/keitaro.md`](integrations/keitaro.md), [`integrations/binom.md`](integrations/binom.md) | S2S postback to Keitaro / Binom with `{click_id}`, status mapping |
 | [`postman`](postman) | Postman collection (every endpoint, example responses) and environment |
 | [`mcp`](mcp) | Connecting the Birinchi Shop MCP server to Claude, ChatGPT, Cursor |
-| [`a2a`](a2a) | Read-only A2A (Agent2Agent) client for the public store agent: Agent Card, `SendMessage`, product search (Node, Python) |
+| [`a2a`](a2a) | Read-only A2A (Agent2Agent) clients: the public store agent (product search) and the partner agent (offers with an API key); Node, Python |
 
 ## Official SDKs
 
